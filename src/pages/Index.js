@@ -52,7 +52,7 @@ function Index() {
         const config = {
             method: 'get',
             // maxBodyLength: Infinity,
-            url: `http://127.0.0.1:8000/${query}`,
+            url: `${process.env.REACT_APP_SERVER_URI}${query}`,
 
         };
 
