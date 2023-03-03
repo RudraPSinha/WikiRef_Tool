@@ -87,11 +87,16 @@ span {
 
 .url {
     margin-left: 12px;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .itemTitle {
     font-size: 1.4rem;
     color: #5b5b5b;
+    cursor: pointer;
 }
 
 #simpleSpinner {

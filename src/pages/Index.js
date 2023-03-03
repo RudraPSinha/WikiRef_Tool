@@ -7,7 +7,7 @@ import { PulseLoader } from "react-spinners";
 import moment from 'moment'
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  }
+}
 
 
 function Index() {
@@ -28,7 +28,7 @@ function Index() {
         setQuery(query)
     }, [location])
 
-    console.log("e",process.env.REACT_APP_SERP)
+    console.log("e", process.env.REACT_APP_SERP)
 
     const [defaultPrompt, setDefaultPrompt] = useState(null)
     const [fetchedCompletion, setFetchCompletion] = useState(null)
@@ -51,9 +51,9 @@ function Index() {
 
         const config = {
             method: 'get',
-           // maxBodyLength: Infinity,
+            // maxBodyLength: Infinity,
             url: `http://127.0.0.1:8000/${query}`,
-            
+
         };
 
         axios(config)
@@ -138,17 +138,17 @@ function Index() {
         <div className="container-main">
             <div className="container-header">
                 <div className="container-header-logo">
-                    IndicRefTool
+                    IndicResourceTool
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="container-input-box">
 
                         <div className="container-input">
-                            <input defaultValue={defaultPrompt ? defaultPrompt : ""} {...register("topic", { required: true })} placeholder="Type Your Topic...." type="text" />
+                            <input defaultValue={defaultPrompt ? defaultPrompt : ""} {...register("topic", { required: true })} placeholder="Ex Regional lifestyle of Pahadi people..." type="text" />
                             <span>{errors.topic && <span>Put something in the prompt*</span>}</span>
                         </div>
                         <div className="container-input-btn">
-                            <input className="submit" value="Look Up" type="submit" />
+                            <input disabled={loading} className="submit" value="Look Up" type="submit" />
                         </div>
 
                     </div>
@@ -167,22 +167,26 @@ function Index() {
                                 <div className="refs">{fetchedCompletion.map((item, idx) => (
                                     <div className="elm" key={item.result_id}>
                                         <div className="pubInfo">
-                                        <div className="itemTitle">
-                                            {item.title}
+                                            <div onClick={() => {
+
+                                                window.open(item.link, '_blank')
+
+                                            }} className="itemTitle">
+                                                {item.title}
+                                            </div>
+                                            <div className="publicationInfo">
+                                                {item.publication_info.summary}
+                                            </div>
                                         </div>
-                                        <div className="publicationInfo">
-                                            {item.publication_info.summary}
-                                        </div>
-                                        </div>
-                                        <br/>
+                                        <br />
                                         <div className="pubInfoAssess">
-                                        <div className="accessedOn">
-                                        Retrieved &nbsp;
-                                            {moment(randomDate(new Date(2012, 0, 1), new Date())).format("DD MMM YYYY")}
-                                        </div>
-                                        <div className="url">
-                                            <a href={item.link} target="_blank">{item.link}</a>
-                                        </div>
+                                            <div className="accessedOn">
+                                                Retrieved &nbsp;
+                                                {moment(randomDate(new Date(2012, 0, 1), new Date())).format("DD MMM YYYY")}
+                                            </div>
+                                            <div className="url">
+                                                <a href={item.link} target="_blank">{item.link}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}</div>
