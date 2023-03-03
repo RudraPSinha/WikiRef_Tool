@@ -9,7 +9,7 @@ import Index from "./pages/Index";
 
 const router = createBrowserRouter([{
     path: "/",
-    element: <div>Hello</div>
+    element: <Index/>
 
 },
 {
