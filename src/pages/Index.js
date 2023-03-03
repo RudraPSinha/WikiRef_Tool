@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useSearchParams } from 'react-router-dom';
-import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { PulseLoader } from "react-spinners";
+import {  useLocation, useNavigate } from "react-router-dom";
+import { useEffect,  useState } from "react";
+
 import moment from 'moment'
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -11,15 +10,15 @@ function randomDate(start, end) {
 
 
 function Index() {
-    const [searchParams] = useSearchParams();
+   
     const navigate = useNavigate();
-    const { setFocus, register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { setFocus, register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         const { topic } = data
         navigate(`?prompt=${topic}`)
     }
 
-    const refCurrent = useRef()
+  
     const location = useLocation();
     const [query, setQuery] = useState("")
 
@@ -42,6 +41,7 @@ function Index() {
             //fetchDataFromOpenAI()
             fetchDataFromSerpAPI()
         }
+  // eslint-disable-next-line
     }, [query])
 
     const fetchDataFromSerpAPI = async () => {
@@ -185,7 +185,7 @@ function Index() {
                                                 {moment(randomDate(new Date(2012, 0, 1), new Date())).format("DD MMM YYYY")}
                                             </div>
                                             <div className="url">
-                                                <a href={item.link} target="_blank">{item.link}</a>
+                                                <a rel="noreferrer" href={item.link} target="_blank">{item.link}</a>
                                             </div>
                                         </div>
                                     </div>
