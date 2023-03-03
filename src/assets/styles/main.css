@@ -99,6 +99,24 @@ span {
     cursor: pointer;
 }
 
+.abstract {
+        margin: 25px;
+    font-size: 0.7rem;
+    padding: 20px;
+    background: #fafafa;
+    width: 50%;
+    border-radius: 8px;
+    border: 1px solid #d8d8d8;
+}
+
+.alert {
+    padding: 20px;
+    margin: 25px;
+    font-size: 0.7rem;
+    color: red;
+    width: 50%;
+}
+
 #simpleSpinner {
     display: inline-block;
     width: 100px;

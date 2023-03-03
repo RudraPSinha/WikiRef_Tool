@@ -31,6 +31,7 @@ function Index() {
 
     const [defaultPrompt, setDefaultPrompt] = useState(null)
     const [fetchedCompletion, setFetchCompletion] = useState(null)
+    const [fetchAbstract, setFetchAbstract] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
     useEffect(() => {
@@ -45,7 +46,9 @@ function Index() {
     }, [query])
 
     const fetchDataFromSerpAPI = async () => {
-        setFetchCompletion({})
+        setFetchCompletion(null)
+        setFetchAbstract(null)
+
         setError(null)
         setLoading(true)
 
@@ -60,6 +63,7 @@ function Index() {
             .then(function (response) {
                 setLoading(false)
                 const data = response.data.data.organic_results
+                setFetchAbstract(response.data.abstract)
                 setFetchCompletion(data)
                 //console.log(JSON.stringify(response.data));
             })
@@ -163,6 +167,13 @@ function Index() {
                         </div>
                     ) : (
                         <div className="loaded">
+                            <>
+                            {fetchAbstract && (
+                                <>
+                                <div className="abstract">{fetchAbstract}</div>
+                                <div className="alert">Please use the content of the above text with caution as it may contain false or partly true data which may in turn be outdated.</div>
+                                </>
+                            )}
                             {fetchedCompletion && (
                                 <div className="refs">{fetchedCompletion.map((item, idx) => (
                                     <div className="elm" key={item.result_id}>
@@ -191,6 +202,7 @@ function Index() {
                                     </div>
                                 ))}</div>
                             )}
+                            </>
                         </div>
                     )
                 )}
